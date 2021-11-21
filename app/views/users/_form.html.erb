@@ -27,6 +27,15 @@
   </div>
 
   <div class="actions">
+    <%= form.label :password %>
+    <%= form.password_field :password, id: :user_password %>
+  </div>
+  <div class="actions">
+    <%= form.label :password_confirmation %>
+    <%= form.password_field :password_confirmation, id: :student_password_confirmation %>
+  </div>
+
+  <div class="actions">
     <%= form.submit %>
   </div>
 <% end %>
