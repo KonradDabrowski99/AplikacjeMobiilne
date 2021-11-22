@@ -3,5 +3,11 @@
   Dzien dobry
 </p>
 <%= Time.now %>
-<h1><%= @some_variable %></h1>
-<%= @students %>
+
+<ul>
+  <%@users.each do |user| %>
+  <%= link_to user do %>
+  <li> <%=user.first_name %> <%=user.last_name %> <%=user.email %>  </li>
+  <%end%>
+  <%end%>
+</ul>

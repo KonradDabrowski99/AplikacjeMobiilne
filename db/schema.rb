@@ -32,9 +32,13 @@ ActiveRecord::Schema.define(version: 2021_11_21_195549) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "plans_exercises", force: :cascade do |t|
+  create_table "plans_exercises", id: false, force: :cascade do |t|
+    t.integer "exercise_id"
+    t.integer "plan_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["exercise_id"], name: "index_plans_exercises_on_exercise_id"
+    t.index ["plan_id"], name: "index_plans_exercises_on_plan_id"
   end
 
   create_table "trainings", force: :cascade do |t|
