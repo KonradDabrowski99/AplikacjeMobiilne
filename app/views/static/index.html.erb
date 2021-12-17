@@ -1,13 +1,12 @@
-<h1>Strona Główna</h1>
-<p>
-  Dzien dobry
-</p>
-<%= Time.now %>
-
-<ul>
-  <%@users.each do |user| %>
-  <%= link_to user do %>
-  <li> <%=user.first_name %> <%=user.last_name %> <%=user.email %>  </li>
-  <%end%>
-  <%end%>
-</ul>
+<h1 class='header'>Strona Główna</h1>
+<% if logged_in? %>
+  <h2>Moje Plany</h2>
+  <% current_user.plans.each do |plan| %>
+    <h3><%= plan.plan_name %></h3>
+    <% plan.exercises.each do |exercise| %>
+      <h4><%= exercise.description %> by <%= exercise.user.email %></h4>
+    <% end %>
+  <% end %>
+<% else %>
+  Nie jesteś zalogowany.
+<% end %>

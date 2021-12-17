@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_22_202441) do
+ActiveRecord::Schema.define(version: 2021_12_17_131909) do
 
   create_table "exercises", force: :cascade do |t|
     t.string "description"
@@ -23,6 +23,10 @@ ActiveRecord::Schema.define(version: 2021_11_22_202441) do
     t.date "date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "plan_id"
+    t.index ["plan_id"], name: "index_favorites_on_plan_id"
+    t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
   create_table "plans", force: :cascade do |t|
@@ -30,6 +34,8 @@ ActiveRecord::Schema.define(version: 2021_11_22_202441) do
     t.boolean "public"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_plans_on_user_id"
   end
 
   create_table "plans_exercises", id: false, force: :cascade do |t|
@@ -46,6 +52,10 @@ ActiveRecord::Schema.define(version: 2021_11_22_202441) do
     t.float "status"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "user_id"
+    t.integer "plan_id"
+    t.index ["plan_id"], name: "index_trainings_on_plan_id"
+    t.index ["user_id"], name: "index_trainings_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -58,4 +68,9 @@ ActiveRecord::Schema.define(version: 2021_11_22_202441) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "favorites", "plans"
+  add_foreign_key "favorites", "users"
+  add_foreign_key "plans", "users"
+  add_foreign_key "trainings", "plans"
+  add_foreign_key "trainings", "users"
 end
