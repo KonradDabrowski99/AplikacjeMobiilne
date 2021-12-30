@@ -1,9 +1,26 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :set_user, only: %i[ show edit update destroy ]
-
+  swagger_controller :users, 'Users'
   # GET /users or /users.json
+
+  # GET /users
+  # GET /users.json
+  swagger_api :index do
+    summary 'Returns all users'
+    notes 'Notes...'
+  end
+
+
   def index
     @users = User.all
+  end
+  # GET /users/1
+  # GET /users/1.json
+  swagger_api :show do
+    summary 'Returns one User'
+    param :path, :id, :integer, :required, "Users id"
+    notes 'Notes...'
   end
 
   # GET /users/1 or /users/1.json
@@ -18,6 +35,15 @@ class UsersController < ApplicationController
   # GET /users/1/edit
   def edit
   end
+
+  swagger_api :create do
+   summary "Create a user"
+   param :form, "user[email]", :string, :required, "Users email"
+   param :form, "user[first_name]", :string, :required, "Users name"
+   param :form, "user[last_name]", :string, :required, "Users lastname"
+   param :form, "user[password]", :string, :required, "Users password"
+
+ end
 
   # POST /users or /users.json
   def create
@@ -35,6 +61,17 @@ class UsersController < ApplicationController
   end
 
   # PATCH/PUT /users/1 or /users/1.json
+  swagger_api :update do
+    summary 'Update a  user'
+    param :path, :id, :integer, :required, "User id"
+    param :form, "user[first_name]", :string, :required, "First_name"
+    param :form, "user[last_name]", :string, :required, "Last_name"
+    param :form, "user[password]", :string, :required, "Password"
+    param :form, "user[email]", :string, :required, "Email"
+    notes 'Notes...'
+  end
+
+  # PATCH/PUT /users/1 or /users/1.json
   def update
     respond_to do |format|
       if @user.update(user_params)
@@ -47,6 +84,13 @@ class UsersController < ApplicationController
     end
   end
 
+
+  # DELETE /users/1 or /users/1.json
+  swagger_api :destroy do
+    summary 'Delete a user'
+    param :path, :id, :integer, :required, "User id"
+    notes 'Notes...'
+  end
   # DELETE /users/1 or /users/1.json
   def destroy
     @user.destroy

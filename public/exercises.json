@@ -1,0 +1,110 @@
+{
+  "apiVersion": "1.0",
+  "swaggerVersion": "1.2",
+  "basePath": "http://localhost:3000",
+  "resourcePath": "exercises",
+  "apis": [
+    {
+      "path": "/exercises",
+      "operations": [
+        {
+          "summary": "Create a statistic",
+          "parameters": [
+            {
+              "paramType": "form",
+              "name": "exercise[description]",
+              "type": "string",
+              "description": "Description",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "exercise[type_of_exercise]",
+              "type": "string",
+              "description": "Type of exercise",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Exercises#create",
+          "method": "post"
+        }
+      ]
+    },
+    {
+      "path": "/exercises/{id}",
+      "operations": [
+        {
+          "summary": "Returns one exercise",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Statistic id",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Exercises#show",
+          "method": "get"
+        }
+      ]
+    },
+    {
+      "path": "/exercises/{id}",
+      "operations": [
+        {
+          "summary": "Update a exercise",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Exercise id",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "exercise[description]",
+              "type": "string",
+              "description": "Description",
+              "required": true
+            },
+            {
+              "paramType": "form",
+              "name": "exercise[type_of_exercise]",
+              "type": "string",
+              "description": "Type of exercise",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Exercises#update",
+          "method": "patch"
+        }
+      ]
+    },
+    {
+      "path": "/exercises/{id}",
+      "operations": [
+        {
+          "summary": "Delete a exercise",
+          "parameters": [
+            {
+              "paramType": "path",
+              "name": "id",
+              "type": "integer",
+              "description": "Exercise id",
+              "required": true
+            }
+          ],
+          "notes": "Notes...",
+          "nickname": "Exercises#destroy",
+          "method": "delete"
+        }
+      ]
+    }
+  ],
+  "authorizations": null
+}

@@ -2,10 +2,17 @@
 <% if logged_in? %>
   <h2>Moje Plany</h2>
   <% current_user.plans.each do |plan| %>
-    <h3><%= plan.plan_name %></h3>
+    <h3><li><%= link_to plan.plan_name, plan %></li></h3>
     <% plan.exercises.each do |exercise| %>
       <h4><%= exercise.description %> by <%= exercise.user.email %></h4>
     <% end %>
+  <% end %>
+ <%= link_to "Dodaj plan", new_plan_path(@plan) %>
+
+  <h2>Moje Treningi</h2>
+  <% current_user.trainings.each do |training| %>
+    <h3><li><%= link_to training.date, training %></li></h3>
+    <%= link_to "Dodaj trening",new_exercise_path(@excercise) %>
   <% end %>
 <% else %>
   Nie jesteś zalogowany.

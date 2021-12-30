@@ -1,7 +1,14 @@
 class TrainingsController < ApplicationController
   before_action :set_training, only: %i[ show edit update destroy ]
+  swagger_controller :trainings, 'Trainings'
+
 
   # GET /trainings or /trainings.json
+  swagger_api :index do
+    summary 'Returns all trainings'
+    notes 'Notes...'
+  end
+
   def index
     @trainings = Training.all
   end
@@ -19,9 +26,20 @@ class TrainingsController < ApplicationController
   def edit
   end
 
+  # POST /plans or /plans.json
+    swagger_api :create do
+      summary 'Create a training'
+      param :header, "Authorization", :string, :required, "Authentication token"
+      param :form, "training[date]", :date, :required, "Trainig date"
+      param :form, "training[status]", :float, :required, "training status"
+      param :form, "training[plan_id]", :integer, :required, "Field id"
+      notes 'Notes...'
+    end
+
   # POST /trainings or /trainings.json
   def create
     @training = Training.new(training_params)
+    @training.user=current_user
 
     respond_to do |format|
       if @training.save
@@ -64,6 +82,6 @@ class TrainingsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def training_params
-      params.require(:training).permit(:date, :status)
+      params.require(:training).permit(:date, :status, :user_id, :plan_id)
     end
 end
